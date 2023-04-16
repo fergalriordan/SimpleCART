@@ -1,3 +1,5 @@
+# N.B. These folds were ultimately not used due to the provision of common folds for all classifiers on 13.04.2023
+
 import json
 import random
 

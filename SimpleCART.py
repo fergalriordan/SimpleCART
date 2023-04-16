@@ -8,11 +8,12 @@ import numpy as np
 
 # Load folds
 folds = []
-for i in range(5):
-    with open(f'phishing_fold_{i}.jsonl') as f:
+for i in range(1, 6):
+    with open(f'fake_fold_{i}.json') as f:
         fold_data = []
         for line in f:
-            fold_data.append(json.loads(line))
+            obj = json.loads(line)
+            fold_data.append(obj)
         folds.append(pd.DataFrame(fold_data))
 
 # Initialize vectorizer and classifier
@@ -45,7 +46,6 @@ for i in range(5):
     report_list.append(report)
 
 # Classification report
-#avg_accuracy = np.mean(accuracy_list)
 avg_report = {}
 for key in report_list[0].keys():
     if isinstance(report_list[0][key], float):
@@ -55,6 +55,5 @@ for key in report_list[0].keys():
         for metric in report_list[0][key].keys():
             avg_report[key][metric] = np.mean([report[key][metric] for report in report_list])
 
-#print("Average Accuracy: ", avg_accuracy)
 print("Classification Report: ")
 print(avg_report)
